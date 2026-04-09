@@ -69,7 +69,7 @@ MindOS AI is an AI-powered personal operating system that helps you **think, pla
 - MongoDB (Mongoose)
 
 ### AI / ML
-- Gemini API (AI reasoning & chat)
+- GROQ API (AI reasoning & chat)
 - Embeddings (semantic search)
 - Vector DB (optional)
 
@@ -104,7 +104,7 @@ Create .env file:
 
 PORT=5000
 MONGO_URI=your_mongodb_url
-GEMINI_API_KEY=your_api_key
+GROQ_API_KEY=your_api_key
 
 Run backend:
 
