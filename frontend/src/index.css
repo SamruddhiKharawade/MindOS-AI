@@ -1,0 +1,173 @@
+/* frontend/src/index.css */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── MindOS Design Tokens ──────────────────────────────────────────────────── */
+:root {
+  /* Brand Colors */
+  --mind-primary:       #6366f1;   /* indigo — buttons, active states      */
+  --mind-primary-light: #818cf8;   /* lighter indigo — hover states        */
+  --mind-accent:        #8b5cf6;   /* violet — accents, AI elements        */
+  --mind-soft:          #e0e7ff;   /* lavender mist — subtle backgrounds   */
+
+  /* Semantic Colors */
+  --mind-success:       #34d399;   /* sage green — done tasks              */
+  --mind-warning:       #fb923c;   /* dusk orange — medium priority        */
+  --mind-danger:        #f87171;   /* soft red — high priority, errors     */
+  --mind-info:          #60a5fa;   /* sky blue — info states               */
+
+  /* Glass / Surface */
+  --mind-glass:         rgba(255, 255, 255, 0.08);   /* frosted glass bg   */
+  --mind-glass-border:  rgba(255, 255, 255, 0.15);   /* frosted glass edge */
+  --mind-glass-hover:   rgba(255, 255, 255, 0.13);   /* hover state        */
+
+  /* Gradients — one per page, inspired by Tide */
+  --grad-dashboard:     linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --grad-chat:          linear-gradient(135deg, #89c4e1 0%, #b8d9e8 60%, #dde8f0 100%);
+  --grad-goals:         linear-gradient(160deg, #667eea 0%, #8b5cf6 50%, #a78bfa 100%);
+  --grad-tasks:         linear-gradient(135deg, #4facfe 0%, #667eea 100%);
+  --grad-sidebar:       linear-gradient(180deg, #1e1b4b 0%, #312e81 50%, #1e1b4b 100%);
+
+  /* Typography Scale */
+  --text-hero:    3rem;     /* 48px — page hero (Good Day) */
+  --text-title:   1.5rem;   /* 24px — section titles       */
+  --text-card:    1rem;     /* 16px — card titles          */
+  --text-body:    0.875rem; /* 14px — body text            */
+  --text-label:   0.6875rem;/* 11px — uppercase labels     */
+
+  /* Spacing */
+  --space-card:   1.25rem;  /* inner card padding          */
+  --space-page:   1.5rem;   /* page horizontal padding     */
+
+  /* Border Radius — Tide uses very round corners */
+  --radius-sm:    0.5rem;   /*  8px */
+  --radius-md:    0.875rem; /* 14px */
+  --radius-lg:    1rem;     /* 16px */
+  --radius-xl:    1.5rem;   /* 24px */
+  --radius-full:  9999px;   /* pill */
+
+  /* Transitions */
+  --transition-fast:   150ms ease;
+  --transition-base:   250ms ease;
+  --transition-slow:   400ms ease;
+}
+
+/* ─── Base Styles ────────────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: #0f0e1a;   /* very dark base — sidebar sits on this */
+  color: #f8fafc;
+  overflow: hidden;       /* prevent double scrollbars — pages scroll internally */
+  height: 100vh;
+}
+
+#root {
+  height: 100vh;
+  display: flex;
+}
+
+/* ─── Scrollbar — minimal, Tide-style ────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* ─── Utility Classes ─────────────────────────────────────────────────────────── */
+
+/* Glass card — used everywhere for Tide's frosted effect */
+.glass-card {
+  background: var(--mind-glass);
+  border: 1px solid var(--mind-glass-border);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: var(--radius-lg);
+}
+
+.glass-card:hover {
+  background: var(--mind-glass-hover);
+  transition: background var(--transition-base);
+}
+
+/* Gradient text — for hero headings */
+.gradient-text {
+  background: linear-gradient(135deg, #a5b4fc, #e879f9);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Pill badge */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-full);
+  font-size: var(--text-label);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.badge-primary {
+  background: rgba(99, 102, 241, 0.2);
+  color: #a5b4fc;
+  border: 1px solid rgba(99, 102, 241, 0.3);
+}
+
+.badge-success {
+  background: rgba(52, 211, 153, 0.15);
+  color: #6ee7b7;
+  border: 1px solid rgba(52, 211, 153, 0.25);
+}
+
+.badge-warning {
+  background: rgba(251, 146, 60, 0.15);
+  color: #fdba74;
+  border: 1px solid rgba(251, 146, 60, 0.25);
+}
+
+.badge-danger {
+  background: rgba(248, 113, 113, 0.15);
+  color: #fca5a5;
+  border: 1px solid rgba(248, 113, 113, 0.25);
+}
+
+/* ─── Framer Motion Page Transition Wrapper ───────────────────────────────────── */
+.page-wrapper {
+  height: 100%;
+  overflow-y: auto;
+  padding: var(--space-page);
+}
+
+/* ─── Focus Ring — accessible, branded ────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--mind-primary);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
